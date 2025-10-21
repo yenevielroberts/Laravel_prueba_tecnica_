@@ -11,8 +11,7 @@
             @foreach ($productos as $products )
                     <li>
                         <div>
-                            <p>{{ $producto->nombre }}</p>
-
+                            <p>{{ $products->nombre }}</p>
                         </div>
                     </li>
             @endforeach

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Categorias;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,12 @@ class ProductosFactory extends Factory
      */
     public function definition(): array
     {
+        $tipo=['normal','delivery'];
         return [
-           //
+            'nombre'=>fake()->name(),
+            'tipo'=>fake()->randomElement($tipo),
+            'descripcion'=>fake()->realText(100),
+           'categoria_id'=>Categorias::inRandomORder()->first()->id,
         ];
     }
 }

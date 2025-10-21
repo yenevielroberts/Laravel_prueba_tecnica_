@@ -18,7 +18,7 @@ class UserController extends Controller
         $user=User::where('email',$email)->where('password',$password)->get();
 
         if($email==$user->email && $password==$user->password){
-            return redirect()->route('getProducts');
+            return redirect()->route('getAllProductos');
         }
     }
 
@@ -30,7 +30,7 @@ class UserController extends Controller
 
             $nuevoUsuario=User::create($request->all());
 
-            return redirect()->route('getProducts');
+            return redirect()->route('getAllProductos');
         
         
     }
