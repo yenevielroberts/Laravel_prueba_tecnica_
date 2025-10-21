@@ -10,12 +10,11 @@ use Illuminate\Http\Request;
 class ProductosController extends Controller
 {
     //Función que deveulve todos los productos /products/get
-    /*public function getAllProductos(){
+    public function getAllProductos(){
         $productos=Productos::with('categorias')->orderby('created_at','desc')->get();
 
-        return $productos;
-        //return view('productos.lista',["productos"=>$productos]);
-    }*/
+        return view('lista',["productos"=>$productos]);
+    }
 
     //función que devuelve los productos por categorias
     
@@ -27,10 +26,10 @@ class ProductosController extends Controller
             if(!$productos){
                 return "No data found";
             }else{
-                 return $productos;
+                return view('lista',['"productos'=>$productos]);
             }
            
-           // return view('productos.lista',['"productos'=>$productos]);
+          
         }else{
              $productos=Productos::with('categorias')->orderby('created_at','desc')->get();
                 return $productos;
@@ -40,13 +39,14 @@ class ProductosController extends Controller
     //función que deveulve todas las categorias /categorias/get
     public function getCategorias(){
         $categorias=Categorias::orderby('created_at','desc')->get();
-        return $categorias;
+        
+        return view('categorias',["categorias"=>$categorias]);
     }
 
     public function vistaCategorias(){
          $categorias=Categorias::orderby('created_at','desc')->get();
-         return $categorias;
-       // return view('productos.categorias',['categorias'=>$categorias]);
+         
+       return view('categorias',['categorias'=>$categorias]);
     }
 
     // /search/
@@ -59,6 +59,11 @@ class ProductosController extends Controller
         return $productos;
 
     }
+
+    public function setOrderVista(){
+        return view('setOrder');
+    }
+
 
     public function setOrder(Request $request ){
 
