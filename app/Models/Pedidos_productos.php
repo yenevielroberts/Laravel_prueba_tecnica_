@@ -9,4 +9,13 @@ class Pedidos_productos extends Model
 {
     /** @use HasFactory<\Database\Factories\PedidosProductosFactory> */
     use HasFactory;
+    protected $fillable=['productos_id','pedidos_id','total_ped'];
+
+     public function productos(){
+        return $this->hasMany(Productos::class);
+    }
+
+     public function pedidos(){
+        return $this->hasMany(Pedido::class);
+    }
 }

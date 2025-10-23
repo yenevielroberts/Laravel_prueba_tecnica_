@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name_pro');
-            $table->string('type_pro');
+            $table->string('nombre_pro');
+            $table->string('tipo_pro');//Normal o delivery
             $table->string('descripcion_pro');
-            $table->float('price_pro');
-            $table->foreignId('categoria_id_pro')->constrained()->onDelete('cascade');
+            $table->float('precio_pro');
+            $table->foreignId('categoria_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -9,4 +9,6 @@ class Alergenos extends Model
 {
     /** @use HasFactory<\Database\Factories\AlergenosFactory> */
     use HasFactory;
+
+    protected $fillable=['nombre_ale'];
 }
