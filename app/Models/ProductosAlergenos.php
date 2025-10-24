@@ -13,10 +13,10 @@ class ProductosAlergenos extends Model
     protected $fillable=['producto_id','alergeno_id'];
 
     public function productos(){
-        return $this->hasMany(Productos::class);
+        return $this->hasMany(Productos::class,'producto_id');
     }
 
     public function alergenos(){
-        return $this->hasMany(Alergenos::class);
+        return $this->hasMany(Alergenos::class,'alergeno_id');
     }
 }

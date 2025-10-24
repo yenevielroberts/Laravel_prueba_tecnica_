@@ -7,6 +7,7 @@
 </head>
 <body>
     <a href="{{ route('getCategorias') }}">Ver categorias</a>
+    <a href="{{ route('pedidos.form')}}">New pedido</a>
     <ul>
             @foreach ($productos as $products )
                     <li>

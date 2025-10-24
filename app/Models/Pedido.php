@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-     protected $fillable=['nombre_pro','tipo_pro','descripcion_pro','precio_pro','categoria_id'];
+     protected $fillable=['pickup_day','pickup_time','address','payment_type'];
     /** @use HasFactory<\Database\Factories\PedidoFactory> */
     use HasFactory;
 

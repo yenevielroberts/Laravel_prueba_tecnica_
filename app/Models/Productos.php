@@ -10,6 +10,8 @@ class Productos extends Model
     /** @use HasFactory<\Database\Factories\ProductosFactory> */
     use HasFactory;
 
+    protected $fillable=['nombre_pro','tipo_pro','descripcion_pro','precio_pro','categoria_id'];
+    
    public function categorias(){
     //Le digo cualcolumna conecta la tabla produtos con categorias
 
@@ -18,7 +20,7 @@ class Productos extends Model
    }
 
    public function productosAlergenos(){
-    return $this->belongsTo(ProductosAlergenos::class);
+    return $this->belongsTo(ProductosAlergenos::class,'productos_id');
    }
 
     public function pedidoProductos(){

@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Categorias;
 use App\Models\Pedido;
 use App\Models\Productos;
+use App\Models\ProductosAlergenos;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
     //Función que deveulve todos los productos /products/get
     public function getAllProductos(){
-        $productos=Productos::orderby('created_at','desc')->get();
+        $productos=Productos::join('productos_alergenos', 'productos.id','=','productos_alergenos.producto_id')->join('alergenos', 'alergenos.id','=','productos_alergenos.alergeno_id')->select('productos.*','alergenos.nombre_ale as nombre_alergeno')->get();
 
-        return view('lista',["productos"=>$productos]);
+       // return view('lista',["productos"=>$productos]);
+
+       return $productos;
     }
 
     //función que devuelve los productos por categorias /products/get/{categoriaID}
@@ -62,5 +65,5 @@ class ProductosController extends Controller
         return $productos;
 
     }
-
+ 
 }

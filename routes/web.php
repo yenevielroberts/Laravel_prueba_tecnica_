@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\UserController;
+use App\Models\Pedido;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +24,8 @@ Route::get('/products/get/type',[ProductosController::class,'getAllProductos'])-
 //Productos por categorias
 Route::get('/products/get',[ProductosController::class,'getProductsByCategoria'])->name('productCategoria');
 
+Route::get('/pedido/create',[PedidosController::class,'formPedido'])->name('pedidos.form');
+
 Route::post('/login',[UserController::class,'login'])->name('login');
 Route::post('/signup',[UserController::class,'registro'])->name('registro');
 
@@ -29,7 +33,9 @@ Route::post('/signup',[UserController::class,'registro'])->name('registro');
 Route::post('/search',[ProductosController::class,'search'])->name('search');
 
 //Inserta un pedido
-Route::post('/setOrder',[ProductosController::class,'setOrder'])->name('setOrder');
+Route::post('/setOrder',[PedidosController::class,'setOrder'])->name('pedidos.setOrder');
+
+Route::get('/history',[PedidosController::class,'history'])->name('pedidos.history');
 
 
 

@@ -13,6 +13,6 @@ class Alergenos extends Model
     protected $fillable=['nombre_ale'];
 
     public function productosAlergenos(){
-    return $this->belongsTo(productosAlergenos::class);
+    return $this->belongsTo(productosAlergenos::class,'alergeno_id');
    }
 }

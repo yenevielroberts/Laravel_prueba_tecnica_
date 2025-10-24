@@ -14,14 +14,20 @@ class PedidosController extends Controller
 
     public function setOrder(Request $request ){
 
-        $pedido=Pedido::create($request->all());
+        $pedido=$request->all();
 
-        return $pedido;
+        Pedido::create($pedido);
+
+        return "Pedido creado";
     }
 
     public function history(){
         $historial=Pedido::orderby('created_at','desc')->get();
 
         return $historial;
+    }
+
+    public function formPedido(){
+        return view('setOrder');
     }
 }
