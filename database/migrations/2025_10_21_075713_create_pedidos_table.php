@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('pick_day');
+            $table->date('pickup_day');
             $table->time('pickup_time');
             $table->string('address');
             $table->string('payment_type');

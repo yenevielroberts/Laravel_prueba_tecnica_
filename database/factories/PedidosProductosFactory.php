@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Pedido;
+use App\Models\Productos;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,8 @@ class PedidosProductosFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'producto_id'=>Productos::inRandomOrder()->first()->id,
+            'pedido_id'=>Pedido::inRandomOrder()->first()->id
         ];
     }
 }

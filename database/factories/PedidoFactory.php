@@ -16,8 +16,13 @@ class PedidoFactory extends Factory
      */
     public function definition(): array
     {
+        $paymentType=['Efectivo','Tarjeta'];
         return [
-            //
+            'pickup_day'=>fake()->date(),
+            'pickup_time'=>fake()->time(),
+            'address'=>fake()->address(),
+            'payment_type'=>fake()->randomElement($paymentType)
+
         ];
     }
 }

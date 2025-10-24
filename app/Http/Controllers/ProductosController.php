@@ -16,9 +16,10 @@ class ProductosController extends Controller
         return view('lista',["productos"=>$productos]);
     }
 
-    //función que devuelve los productos por categorias
-    public function getProductsByCategoria($categoriaId=null){
+    //función que devuelve los productos por categorias /products/get/{categoriaID}
+    public function getProductsByCategoria(Request $request){
 
+        $categoriaId=$request->input('categoria_id');
         if($categoriaId){
             $productos=Productos::where('categoria_id',$categoriaId)->with('categorias')->get();//Con el with hace dos consultas por cada tabla en luego los combina en memoria
 
@@ -46,35 +47,20 @@ class ProductosController extends Controller
 
     // /search/
     public function search(Request $request){
-        $nombre=$request->input('nombre');
-        $descripcion=$request->input('descripcion');
+        $keyword=$request->input("keyword");
 
-        $productos=Productos::where('nombre',$nombre)->where('descripcion',$descripcion)->get();
+        if(empty($keyword)){
+            return response()->json([]);
+        }
+        //$query es la variable interna y representa la subconsulta
+        //use para definir los parametros
+        //función anonima
+        $productos=Productos::where(function ($query) use ($keyword){
+            $query->where('nombre_pro','LIKE','%'.$keyword.'%')->Orwhere('descripcion_pro','LIKE','%'.$keyword.'%');
+        })->get();
 
         return $productos;
 
     }
 
-    public function setOrderVista(){
-        return view('setOrder');
-    }
-
-
-    public function setOrder(Request $request ){
-
-        $pedido=Pedido::create($request->all());
-
-        return "";
-    }
-
-    public function history(){
-        $historial=Pedido::orderby('created_at','desc')->get();
-
-        return $historial;
-    }
-
-    public function editUser(Request $request){
-        
-
-    }
 }

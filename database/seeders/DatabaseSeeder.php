@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PedidosProductos;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,7 +27,9 @@ class DatabaseSeeder extends Seeder
             CategoriasSeeder::class,
             ProductosSeeder::class,
             AlergenosSeeder::class,
-            ProductosAlergenosSeeder::class
+            PedidoSeeder::class,
+            ProductosAlergenosSeeder::class,
+            PedidosProductosSeeder::class
         ]);
     }
 }

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('producto_id')->constrained();
             $table->foreignId('pedido_id')->constrained();
-            $table->float('total_ped');
             $table->unique(['producto_id','pedido_id']);
             $table->timestamps();
         });

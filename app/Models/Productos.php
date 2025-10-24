@@ -20,4 +20,8 @@ class Productos extends Model
    public function productosAlergenos(){
     return $this->belongsTo(ProductosAlergenos::class);
    }
+
+    public function pedidoProductos(){
+    return $this->belongsTo(PedidosProductos::class);
+   }
 }

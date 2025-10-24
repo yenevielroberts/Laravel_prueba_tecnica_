@@ -31,7 +31,18 @@ class UserController extends Controller
             $nuevoUsuario=User::create($request->all());
 
             return redirect()->route('getAllProductos');
-        
+         
+    }
+
+    public function changePassword(){
+
+    }
+
+    public function editUser(){
+
+    }
+
+    public function forgot(){
         
     }
 }
