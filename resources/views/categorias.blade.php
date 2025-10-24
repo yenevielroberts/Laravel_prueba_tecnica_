@@ -10,7 +10,7 @@
             @foreach ($categorias as $categoria )
                     <li>
                         <div>
-                            <p>{{ $categoria->categoria }}</p>
+                            <p>{{ $categoria->type_cat }}</p>
 
                         </div>
                     </li>

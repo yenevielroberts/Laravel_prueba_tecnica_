@@ -11,28 +11,23 @@ class ProductosController extends Controller
 {
     //Función que deveulve todos los productos /products/get
     public function getAllProductos(){
-        $productos=Productos::with('categorias')->orderby('created_at','desc')->get();
+        $productos=Productos::orderby('created_at','desc')->get();
 
         return view('lista',["productos"=>$productos]);
     }
 
     //función que devuelve los productos por categorias
-    
-    public function getProducts($categoriaId=null){
+    public function getProductsByCategoria($categoriaId=null){
 
         if($categoriaId){
             $productos=Productos::where('categoria_id',$categoriaId)->get();
 
-            if(!$productos){
-                return "No data found";
-            }else{
-                return view('lista',['"productos'=>$productos]);
-            }
-           
-          
+            return view('lista',['productos'=>$productos]);
         }else{
-             $productos=Productos::with('categorias')->orderby('created_at','desc')->get();
-                return $productos;
+
+             $productos=Productos::orderby('created_at','desc')->get();
+                return view('lista',['productos'=>$productos]);
+
         }
     }
 

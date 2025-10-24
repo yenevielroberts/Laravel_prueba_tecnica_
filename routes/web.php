@@ -19,7 +19,8 @@ Route::get('/categorias/get/',[ProductosController::class,'getCategorias'])->nam
 
 Route::get('/products/get',[ProductosController::class,'getAllProductos'])->name('getAllProductos');
 
-Route::get('/products/get/{categoriaId}',[ProductosController::class,'getProducts'])->name('productCategoria');
+Route::get('/products/get/{categoriaId}',[ProductosController::class,'getProductsByCategoria'])->name('productCategoria');
+
 Route::post('/login',[UserController::class,'login'])->name('login');
 Route::post('/signup',[UserController::class,'registro'])->name('registro');
 

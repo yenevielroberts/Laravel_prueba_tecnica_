@@ -11,4 +11,8 @@ class Alergenos extends Model
     use HasFactory;
 
     protected $fillable=['nombre_ale'];
+
+    public function productosAlergenos(){
+    return $this->belongsTo(productosAlergenos::class);
+   }
 }

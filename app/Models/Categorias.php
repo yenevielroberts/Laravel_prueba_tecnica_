@@ -12,6 +12,7 @@ class Categorias extends Model
     use HasFactory;
 
      public function productos(){
-        return $this->hasMany(Productos::class);
+        //Le digo que en la tabla productos los registro que tienen la categoria_id = id de esta categoría pertenecen a esta categoria.
+        return $this->hasMany(Productos::class, 'categoria_id');
     }
 }

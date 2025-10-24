@@ -11,7 +11,8 @@
             @foreach ($productos as $products )
                     <li>
                         <div>
-                            <p>{{ $products->nombre }}</p>
+                            <p>Nombre producto: {{ $products->nombre_pro }}</p>
+                            <p>Categoria: {{ $products->categoria_id}}</p>
                         </div>
                     </li>
             @endforeach
