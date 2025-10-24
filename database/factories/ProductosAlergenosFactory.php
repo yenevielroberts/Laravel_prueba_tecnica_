@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Alergenos;
+use App\Models\Productos;
+use App\Models\ProductosAlergenos;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +17,12 @@ class ProductosAlergenosFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = ProductosAlergenos::class;//Le digo digo manualmnente que modelo representa ya que el nombre del modelo no sigue la convención tipica porque tiene un guio y debido a eso Laravel no pueden encontrarlo automaticamente
     public function definition(): array
     {
         return [
-            //
+            'producto_id'=>Productos::inRandomOrder()->first()->id,
+            'alergeno_id'=>Alergenos::inRandomOrder()->first()->id
         ];
     }
 }

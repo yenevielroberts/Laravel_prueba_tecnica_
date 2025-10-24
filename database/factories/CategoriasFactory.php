@@ -17,8 +17,7 @@ class CategoriasFactory extends Factory
     public function definition(): array
     {
         return [
-            'categoria'=>fake()->name(),
-            'Subcategoria'=>fake()->name()
+            'type_cat'=>fake()->name(),
         ];
     }
 }

@@ -19,9 +19,10 @@ class ProductosFactory extends Factory
     {
         $tipo=['normal','delivery'];
         return [
-            'nombre'=>fake()->name(),
-            'tipo'=>fake()->randomElement($tipo),
-            'descripcion'=>fake()->realText(100),
+            'nombre_pro'=>fake()->name(),
+            'tipo_pro'=>fake()->randomElement($tipo),
+            'descripcion_pro'=>fake()->realText(100),
+            'precio_pro'=>fake()->randomFloat(1,100),
            'categoria_id'=>Categorias::inRandomORder()->first()->id,
         ];
     }

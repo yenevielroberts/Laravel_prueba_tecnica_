@@ -17,7 +17,7 @@ class AlergenosFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre_ale'=>fake()->name()
         ];
     }
 }

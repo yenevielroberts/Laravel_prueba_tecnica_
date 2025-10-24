@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('pedidos_productos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('productos_id')->constrained();
-            $table->foreignId('pedidos_id')->constrained();
+            $table->foreignId('producto_id')->constrained();
+            $table->foreignId('pedido_id')->constrained();
             $table->float('total_ped');
-            $table->unique(['productos_id','pedidos_id']);
+            $table->unique(['producto_id','pedido_id']);
             $table->timestamps();
         });
     }
