@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,9 +16,9 @@ class UserController extends Controller
         $email=$request->input('email');
         $password=$request->input('password');
 
-        $user=User::where('email',$email)->where('password',$password)->get();
+        $user=User::where('email',$email)->first();
 
-        if($email==$user->email && $password==$user->password){
+        if($user && Hash::check($password,$user->password)){
             return redirect()->route('getAllProductos');
         }
     }
@@ -43,6 +44,6 @@ class UserController extends Controller
     }
 
     public function forgot(){
-        
+
     }
 }

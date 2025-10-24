@@ -12,7 +12,12 @@ class Alergenos extends Model
 
     protected $fillable=['nombre_ale'];
 
-    public function productosAlergenos(){
-    return $this->belongsTo(productosAlergenos::class,'alergeno_id');
+    public function productos(){
+    return $this->belongsToMany(
+        //Creo una tabla pivot
+        productos::class,
+        'productos_alergenos',//Nombre de la tabla auxiliar en la base de datos
+        'producto_id',
+        'alergeno_id');
    }
 }

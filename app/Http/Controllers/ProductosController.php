@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Categorias;
-use App\Models\Pedido;
 use App\Models\Productos;
 use App\Models\ProductosAlergenos;
 use Illuminate\Http\Request;
@@ -12,7 +10,8 @@ class ProductosController extends Controller
 {
     //Función que deveulve todos los productos /products/get
     public function getAllProductos(){
-        $productos=Productos::join('productos_alergenos', 'productos.id','=','productos_alergenos.producto_id')->join('alergenos', 'alergenos.id','=','productos_alergenos.alergeno_id')->select('productos.*','alergenos.nombre_ale as nombre_alergeno')->get();
+
+        $productos=Productos::with(['categoria','alergenos'])->get();
 
        // return view('lista',["productos"=>$productos]);
 
@@ -22,15 +21,23 @@ class ProductosController extends Controller
     //función que devuelve los productos por categorias /products/get/{categoriaID}
     public function getProductsByCategoria(Request $request){
 
-        $categoriaId=$request->input('categoria_id');
-        if($categoriaId){
-            $productos=Productos::where('categoria_id',$categoriaId)->with('categorias')->get();//Con el with hace dos consultas por cada tabla en luego los combina en memoria
+        //para empezar los parametro? y para separar entre ellos &
+        $categoriaId=$request->input('categoriaId');
+        $alergenoId=$request->input('alergenoId');
 
-            return view('lista',['productos'=>$productos]);
+        if($categoriaId!=null && $alergenoId!=null){
+
+             $productos=ProductosAlergenos::where('alergeno_id',$alergenoId)->get();
+            return $productos;
+
+        }else if($categoriaId!=null){
+
+               $productos=Productos::with('categoria')->where('categoria_id',$categoriaId)->get();//Con el with hace dos consultas por cada tabla en luego los combina en memoria
+
+             return view('lista',['productos'=>$productos]);
         }else{
-
-             $productos=Productos::orderby('created_at','desc')->get();
-                return view('lista',['productos'=>$productos]);
+            $productos=Productos::orderby('created_at','desc')->get();
+            return view('lista',['productos'=>$productos]);
 
         }
     }
@@ -67,3 +74,13 @@ class ProductosController extends Controller
     }
  
 }
+
+
+/**
+ * Busca devuelve el id del alergeno que coincida con el nombre 
+ * luego devuelve todos losproductos que tengan ese alegerno
+ * $nombreAlergeno="Buddy Schaden
+*   $alergeno=Alergenos::where('nombre_ale', $nombreAlergeno)->firs(); first() ejecuta la consulta
+
+*   $datos=ProductosAlergenos::where('alergeno_id',$alergeno->id)->get();
+ */
