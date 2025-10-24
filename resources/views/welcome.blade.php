@@ -6,7 +6,17 @@
     <title>Welcome</title>
 </head>
 <body>
-    <a href="{{ route('loginVista') }}">Log in</a>
+      <!--Solo se muestra lo que esta dentro de esta directiva si el usuario no esta autenticado, es un invitado-->
+    @guest
+          <a href="{{ route('show.login') }}">Log in</a>
      <a href="{{ route('registroVista') }}">Registro</a>
+    @endguest
+  
+
+     <!--Solo se muestra lo que esta dentro de esta directiva si el usuario esta autenticado-->
+     @auth
+          <a href="{{ route('getCategorias') }}">Ver categorias</a>
+     @endauth
+    
 </body>
 </html>

@@ -6,6 +6,7 @@
     <title>Lista de pedidos</title>
 </head>
 <body>
+    <h1>Hola {{Auth::user()->name}}</h1><!--Puedo acceder a las diferentes propiedades como name and email-->
     <a href="{{ route('getCategorias') }}">Ver categorias</a>
     <a href="{{ route('pedidos.form')}}">New pedido</a>
     <ul>
@@ -18,5 +19,11 @@
                     </li>
             @endforeach
     </ul>
+
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button>Logout</button>
+    </form>
+
 </body>
 </html>

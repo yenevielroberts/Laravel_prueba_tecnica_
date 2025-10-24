@@ -13,9 +13,7 @@ class ProductosController extends Controller
 
         $productos=Productos::with(['categoria','alergenos'])->get();
 
-       // return view('lista',["productos"=>$productos]);
-
-       return $productos;
+        return view('lista',["productos"=>$productos]);
     }
 
     //función que devuelve los productos por categorias /products/get/{categoriaID}

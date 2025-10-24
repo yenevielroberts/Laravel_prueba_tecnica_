@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcomPage');
 
 
 
-Route::get('/login',[UserController::class,'loginVista'])->name('loginVista');
+Route::get('/login',[UserController::class,'loginVista'])->name('show.login');
 
 Route::get('/signup',[UserController::class,'vistaRegistro'])->name('registroVista');
 //Obtengo todas las categorias
@@ -28,6 +28,8 @@ Route::get('/pedido/create',[PedidosController::class,'formPedido'])->name('pedi
 
 Route::post('/login',[UserController::class,'login'])->name('login');
 Route::post('/signup',[UserController::class,'registro'])->name('registro');
+
+Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
 //Busqueda
 Route::post('/search',[ProductosController::class,'search'])->name('search');
