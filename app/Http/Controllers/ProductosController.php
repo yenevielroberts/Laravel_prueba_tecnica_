@@ -20,7 +20,7 @@ class ProductosController extends Controller
     public function getProductsByCategoria($categoriaId=null){
 
         if($categoriaId){
-            $productos=Productos::where('categoria_id',$categoriaId)->get();
+            $productos=Productos::where('categoria_id',$categoriaId)->with('categorias')->get();//Con el with hace dos consultas por cada tabla en luego los combina en memoria
 
             return view('lista',['productos'=>$productos]);
         }else{
