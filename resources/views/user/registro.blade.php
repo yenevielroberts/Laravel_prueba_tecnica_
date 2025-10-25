@@ -29,9 +29,10 @@
             <label for="password_confirmation" class="font-bold">Confirmar ontraseña </label>
             <input type="password" id="password_confirmation" name="password_confirmation" value="" required class="block w-full h-8 mt-2 mb-4 p-2 border-1">
 
-            <div>
-                <button type="submit" id="btnRegistro" name="btnRegistro"> Registrarse</button>
-                 <a href="{{ route('login') }}" class="hover:text-blue-700 mt-3">¿Has olvidado tu contraseña?</a>
+            <div class="flex flex-col items-center">
+                <button type="submit" id="btnRegistro" name="btnRegistro" class="rounded-full w-25 p-1 bg-green-700 hover:bg-yellow-300"> Registrarse</button>
+                 <a href="{{ route('getEmailForm') }}" class="hover:text-blue-700 mt-3">¿Has olvidado tu contraseña?</a>
+                   <a href="{{ route('login') }}" class="hover:text-blue-700">¿Ya tienes una cuenta?</a>
             </div>
           
         </form>
