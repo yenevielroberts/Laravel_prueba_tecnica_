@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Registro</title>
+       @vite('resources/css/app.css')
 </head>
-<body>
-    <div>
-        <h1>registro</h1>
+<body class="bg-orange-100 w-screen h-screen">
+    <div class="flex flex-col justify-center items-center w-full h-full" >
+        <h1 class="font-bold text-2xl">Registro</h1>
 
-        <form method="POST" action="{{ route('registro') }}">
+        <div class="flex flex-col border-2 p-2 w-90 h-150 mt-2 rounded-xl justify-center bg-amber-50">
+              <form method="POST" action="{{ route('registro') }}">
             @csrf
 
-            <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+            <label for="name" class="font-bold">Nombre</label>
+            <input type="text" id="name" name="name" value="{{ old('name') }}" required class="block w-full h-8 mt-2 mb-4 p-2 border-1">
 
-            <label for="phone">Tel:</label>
-            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required>
+            <label for="phone" class="font-bold">Tel:</label>
+            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required class="block w-full h-8 mt-2 mb-4 p-2 border-1">
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+            <label for="email" class="font-bold">Email</label>
+            <input type="email" id="email" name="email" value="{{ old('email') }}" required class="block w-full h-8 mt-2 mb-4 p-2 border-1">
 
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" value="" required>
+            <label for="password" class="font-bold">Contraseña</label>
+            <input type="password" id="password" name="password" value="" required class="block w-full h-8 mt-2 mb-4 p-2 border-1">
 
-            <label for="password_confirmation">Confirmar ontraseña </label>
-            <input type="password" id="password_confirmation" name="password_confirmation" value="" required>
+            <label for="password_confirmation" class="font-bold">Confirmar ontraseña </label>
+            <input type="password" id="password_confirmation" name="password_confirmation" value="" required class="block w-full h-8 mt-2 mb-4 p-2 border-1">
 
-
-            <button type="submit" id="btnRegistro" name="btnRegistro"> Registrarse</button>
+            <div>
+                <button type="submit" id="btnRegistro" name="btnRegistro"> Registrarse</button>
+                 <a href="{{ route('login') }}" class="hover:text-blue-700 mt-3">¿Has olvidado tu contraseña?</a>
+            </div>
+          
         </form>
-    </div>
+        </div>
 
-        <!-- validation errors -->
+              <!-- validation errors -->
     @if($errors->any())<!--The variable errors has all the validations errors and we can check if there'sany with the method any-->
 
     <ul class="px-4 py-2 bg-red-100">
@@ -44,5 +49,9 @@
 
     </ul>
     @endif
+      
+    </div>
+
+  
 </body>
 </html>
