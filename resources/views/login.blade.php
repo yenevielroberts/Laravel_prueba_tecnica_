@@ -19,6 +19,8 @@
 
              <button type="submit" id="btnLogin" name="btnLogin"> Login</button>
         </form>
+
+        <a href="{{ route('getEmailForm') }}">¿Has olvidado tu contraseña?</a>
     </div>
 
       <!-- validation errors -->

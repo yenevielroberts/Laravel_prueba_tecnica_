@@ -4,7 +4,7 @@ use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\UserController;
 use App\Mail\resetPassword;
-use Illuminate\Support\Facades\Mail;
+
 use App\Models\Pedido;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +25,7 @@ Route::middleware('guest')->controller(UserController::class)->group(function ()
 });
 
 
+//User logeados
 //Cojo todas las rutas que quiero proteger y las agrupos aquí para que todas tenga el mismo middleware
 Route::middleware('auth')->group(function (){
 
@@ -39,6 +40,9 @@ Route::get('/products/get',[ProductosController::class,'getProductsByCategoria']
 
 Route::get('/pedido/create',[PedidosController::class,'formPedido'])->name('pedidos.form');
 
+Route::get('/user/changePassword',[UserController::class,'formChangePassword'])->name('formChangePassword');
+Route::post('/user/changePassword',[UserController::class,'changePassword'])->name('changePassword');
+
 //Busqueda
 Route::post('/search',[ProductosController::class,'search'])->name('search');
 
@@ -48,15 +52,14 @@ Route::post('/setOrder',[PedidosController::class,'setOrder'])->name('pedidos.se
 Route::get('/history',[PedidosController::class,'history'])->name('pedidos.history');
 });
 
-Route::get('/forgot', function(){
 
-     try {
-        Mail::to('mendezyeneviel@gmail.com')->send(new \App\Mail\resetPassword());
-        return "Mensaje enviado";
-    } catch (\Exception $e) {
-        return "Error al enviar el correo: " . $e->getMessage();
-    }
-});
+Route::post('/forgot/sendLink',[UserController::class,'sendlink'])->name('user.sendEmail');
+
+Route::post('/forgot',[UserController::class,'reset'])->name('user.resetPassord');
+
+Route::get('forgot/form',[UserController::class,'getPasswordForm'])->name('getPasswordForm');
+
+Route::get('/forgot/password',[UserController::class,'getEmail'])->name('getEmailForm');
 
 
 

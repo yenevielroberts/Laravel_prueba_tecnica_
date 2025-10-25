@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>¿Has olvidado tu contraseña?</h1>
-    <p>has click en el siguiente enlace para cambiar</p>
+    <p>has click en el siguiente enlace para cambiar la contraseña</p>
+    <a href="{{ route('getPasswordForm') }}">Cambiar contraseña</a>
 </body>
 </html>

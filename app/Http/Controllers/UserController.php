@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use \App\Mail\resetPassword;
+use App\Models\password_reset_tokens;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -35,8 +39,9 @@ class UserController extends Controller
     
     }
 
+
     public function vistaRegistro(){
-        return view('registro');
+        return view('user.registro');
     }
 
     public function registro(Request $request){
@@ -55,15 +60,91 @@ class UserController extends Controller
          
     }
 
-    public function changePassword(){
+    public function changePassword(Request $request){
+        $userId=$request->input('userID');
+        $validated=$request->validate([
+            'password'=>'required|string|min:8|confirmed'
+        ]);
+
+        $user=User::findOrFail($userId);
+        $user->update($validated);
+        return redirect()->route('show.login');
 
     }
 
     public function editUser(){
 
     }
+    //Método que envia una vista con un formulario para obtener el email
+    public function getEmail(){
+        return view('user.formGetEmail');
+    }
 
-    public function forgot(){
+    //Método que envia una vista con un formulario para obtener las nuevas contraseñas
+    public function getPasswordForm(){
+        return view('user.formNewPassword');
+    }
+
+
+    //Método que cambia la contraseña en la base de datos
+    public function sendlink(Request $request){
+
+        
+        $validated=$request->validate([
+            'email'=>'required|email'
+        ]);
+        $user=User::where('email',$validated)->first();
+       
+        if(! $user){
+            return back()->with('status','Si el mail existe, un enlace para cambiar contraseña se envio');
+        }
+
+        $rawToken= Str::random(64);
+        $hashed= hash('sha256',$rawToken);
+
+        password_reset_tokens::updateOrInsert(
+            ['email'=>$user->email],
+            ['token'=>$hashed, 'created_at'=>now()]
+        );
+
+        $url=route('getPasswordForm',[
+            'token'=>$rawToken,
+            'email'=>$user->email
+        ]);
+
+          Mail::raw("Reset Password:{$url}",function($m) use($user){
+                $m->to($user->email)->subject("Password Reset");
+          });
+
+
+    }
+
+    public function reset(Request $request){
+
+        $data=$request->validate([
+            'toke'=>'required|string',
+            'email'=>'required|email',
+            'password'=>'required|confirmed|min:8'
+        ]);
+
+        $record=password_reset_tokens::where('email',$data['email'])->frist();
+
+        abort_unless($record, 400);//Cambiar luego
+
+        $valid= hash_equals($record->token, hash('sha256',$data['token'])) && now()->diffInMinutes($record->created_at)<= 60;
+
+        abort_unless($valid, 400);
+
+        $user=User::where('email', $data['email'])->first();
+        $user->forceFill(['password'=>Hash::make($data['password'])])->save();
+
+        password_reset_tokens::where('email',$data['email'])->delete();
+
+        auth::login($user);
+
+        $request->session()->regenerate();
+
+        return redirect()->route('getAllProductos')->with('status','Password updated');
 
     }
 
