@@ -12,13 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class resetPassword extends Mailable
 {
     use Queueable, SerializesModels;
-
+    private $url;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($url)
     {
-        //
+        $this->url=$url;
     }
 
     /**
@@ -40,7 +40,8 @@ class resetPassword extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'resetPassword',
+            view: 'user.resetPassword',
+            with:['url'=>$this->url]
         );
     }
 

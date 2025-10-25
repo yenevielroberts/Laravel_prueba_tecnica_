@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    @vite('resources/css/app.css')
 </head>
-<body>
-      <!--Solo se muestra lo que esta dentro de esta directiva si el usuario no esta autenticado, es un invitado-->
-    @guest
-          <a href="{{ route('show.login') }}">Log in</a>
-     <a href="{{ route('registroVista') }}">Registro</a>
-    @endguest
-  
+<body class="bg-orange-100">
 
-     <!--Solo se muestra lo que esta dentro de esta directiva si el usuario esta autenticado-->
-     @auth
-          <a href="{{ route('getCategorias') }}">Ver categorias</a>
-     @endauth
-    
+     <main class="flex flex-col justify-center items-center w-screen h-screen border-amber-600  border">
+          <h1 class="text-3xl font-bold texr-primary mt-3">Welcom</h1>
+          <div class="text-lg font-bold mt-10  items-center  justify-center">  
+               <a href="{{ route('show.login') }}"  class=" bg-green-500 p-3 m-5 rounded-full  hover:bg-yellow-300">Log in</a>
+               <a href="{{ route('registroVista') }}"  class=" bg-green-500 p-3 m-5 rounded-full  hover:bg-yellow-300">Registro</a>
+          </div>
+     </main>
 </body>
 </html>

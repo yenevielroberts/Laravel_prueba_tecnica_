@@ -13,7 +13,7 @@ class ProductosController extends Controller
 
         $productos=Productos::with(['categoria','alergenos'])->get();
 
-        return view('lista',["productos"=>$productos]);
+        return view('products.lista',["productos"=>$productos]);
     }
 
     //función que devuelve los productos por categorias /products/get/{categoriaID}
@@ -32,10 +32,10 @@ class ProductosController extends Controller
 
                $productos=Productos::with('categoria')->where('categoria_id',$categoriaId)->get();//Con el with hace dos consultas por cada tabla en luego los combina en memoria
 
-             return view('lista',['productos'=>$productos]);
+             return view('products.lista',['productos'=>$productos]);
         }else{
             $productos=Productos::orderby('created_at','desc')->get();
-            return view('lista',['productos'=>$productos]);
+            return view('products.lista',['productos'=>$productos]);
 
         }
     }

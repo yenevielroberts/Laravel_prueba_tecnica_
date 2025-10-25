@@ -8,6 +8,6 @@
 <body>
     <h1>¿Has olvidado tu contraseña?</h1>
     <p>has click en el siguiente enlace para cambiar la contraseña</p>
-    <a href="{{ route('getPasswordForm') }}">Cambiar contraseña</a>
+    <a href="{{ $url }}">Cambiar contraseña</a>
 </body>
 </html>

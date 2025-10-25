@@ -81,8 +81,11 @@ class UserController extends Controller
     }
 
     //Método que envia una vista con un formulario para obtener las nuevas contraseñas
-    public function getPasswordForm(){
-        return view('user.formNewPassword');
+    public function getPasswordForm(Request $request){
+        $token=$request->input('token');
+        $email=$request->input('email');
+
+        return view('user.formNewPassword',["token"=>$token, "email"=>$email]);
     }
 
 
@@ -112,22 +115,19 @@ class UserController extends Controller
             'email'=>$user->email
         ]);
 
-          Mail::raw("Reset Password:{$url}",function($m) use($user){
-                $m->to($user->email)->subject("Password Reset");
-          });
-
-
+          Mail::to($user->email)->send(new resetPassword($url));
+          
     }
 
     public function reset(Request $request){
 
         $data=$request->validate([
-            'toke'=>'required|string',
+            'token'=>'required|string',
             'email'=>'required|email',
             'password'=>'required|confirmed|min:8'
         ]);
 
-        $record=password_reset_tokens::where('email',$data['email'])->frist();
+        $record=password_reset_tokens::where('email',$data['email'])->first();
 
         abort_unless($record, 400);//Cambiar luego
 
