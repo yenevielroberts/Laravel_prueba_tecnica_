@@ -18,13 +18,21 @@ class ProductosController extends Controller
         return view('productos.homePage',["productos"=>$productos]);
     }
 
-    //función que devuelve los productos por categorias /products/get/{categoriaID}
+    public function getOneProduct(Request $request){
+
+        $productoId=$request->input('productoId');
+        $producto=Productos::with(['categoria','alergenos'])->where('id',$productoId)->first();
+
+        return view('productos.detalle',['producto',$producto]);
+    }
+
+    //función que devuelve los productos por categorias /products/get/
     public function getProductsByCategoria(Request $request){
 
         //para empezar los parametro? y para separar entre ellos &
         $tiposComida=$request->input('tiposComida');
         $alergenos=$request->input('alergenos');
-        $resultados=[];
+        $resultados=collect();
 
         if(!empty($tiposComida)&& !empty($alergenos)){
 
@@ -32,11 +40,18 @@ class ProductosController extends Controller
 
                 foreach($alergenos as $alergeno){
 
-                    $productos=Productos::with(['categoria','alergenos'])->where('type_cat',$tipo)->where('nombre_ale',$alergeno)->get();
+                    $productos=Productos::with(['categoria','alergenos'])->whereHas('categoria',function($query) use ($tipo){
+                        $query->where('type_cat',$tipo);
+                    })->whereHas('alergenos', function($query) use($alergeno){
+                        $query->where('nombre_ale',$alergeno);
+                    })->get();
 
-                    $resultados=$productos;
+                    $resultados=$resultados->merge($productos);//Con esto junto todos las coleciones y no tengo un array de coleciones. Luego en la vista tendria que hacer dos bucles
+
                 }
+               
             }
+              return view('productos.resultadosSearch',['resultados'=>$resultados]);
         }else if(!empty($tiposComida)){
 
              foreach($tiposComida as $tipo){
@@ -44,23 +59,30 @@ class ProductosController extends Controller
                 $productos=Productos::with('categoria')->whereHas('categoria',function($query) use($tipo){
                     $query->where('type_cat',$tipo);
                 })->get();
-                $resultados[]=$productos;
+
+                $resultados=$resultados->merge($productos);
             }
+            //dd($resultados);
+            return view('productos.resultadosSearch',['resultados'=>$resultados]);
                  
         }else if(!empty($alergenos)){
     
             foreach($alergenos as $alergeno){
 
-                $productos=Productos::with('alergenos')->where('nombre_ale',$alergeno)->get();
-                $resultados[]=$productos;
+                $productos=Productos::with('alergenos')->whereHas('alergenos',function($query) use($alergeno){
+                    $query->where('nombre_ale',$alergeno);
+                })->get();
+                $resultados=$resultados->merge($productos);
             }
+
+            return view('productos.resultadosSearch',['resultados'=>$resultados]);
         }else{
 
              $productos=Productos::orderby('created_at','desc')->get();
             return view('productos.resultadosSearch',['resultados'=>$productos]); 
         }
 
-        return view('productos.resultadosSearch',['resultados'=>$resultados]);
+        
     }
 
     //función que deveulve todas las categorias /categorias/get

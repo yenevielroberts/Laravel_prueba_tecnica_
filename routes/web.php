@@ -39,6 +39,8 @@ Route::get('/categorias/get/',[ProductosController::class,'getCategorias'])->nam
 //Obtengo todos los prodcutos
 Route::get('/products/get/type',[ProductosController::class,'getAllProductos'])->name('homePage');
 
+//obtener detalle de un producto
+Route::get('/producto/get/{productoId}',[ProductosController::class,'getOneProduct'])->name('detalle');
 //Productos por categorias
 Route::get('/products/get',[ProductosController::class,'getProductsByCategoria'])->name('productCategoria');
 
