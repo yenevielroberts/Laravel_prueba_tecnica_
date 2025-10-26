@@ -76,7 +76,7 @@ class UserController extends Controller
 
     }
     //Método que envia una vista con un formulario para obtener el email
-    public function getEmail(){
+    public function getEmailForm(){
         return view('user.formGetEmail');
     }
 
@@ -110,7 +110,7 @@ class UserController extends Controller
             ['token'=>$hashed, 'created_at'=>now()]
         );
 
-        $url=route('getPasswordForm',[
+        $url=route('user.getPasswordForm',[
             'token'=>$rawToken,
             'email'=>$user->email
         ]);
