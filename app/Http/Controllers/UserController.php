@@ -29,7 +29,7 @@ class UserController extends Controller
         if(Auth::attempt($validated)){  //attempt to login, if sucessull creates a session and it also returns a boolean
             $request->session()->regenerate();//regenerates the session id for a newly autenticated user to prevent fixation attack
 
-            return redirect()->route('getAllProductos');
+            return redirect()->route('homePage');
         }
 
         //Validation execption. Renders the same page with the erros
@@ -56,7 +56,7 @@ class UserController extends Controller
            $user= User::create($validated);//returns a instance model of user
             //Autenticación
             Auth::login($user);//Creates a cookie
-            return redirect()->route('getAllProductos');
+            return redirect()->route('homePage');
          
     }
 
@@ -144,7 +144,7 @@ class UserController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('getAllProductos')->with('status','Password updated');
+        return redirect()->route('homePage')->with('status','Password updated');
 
     }
 

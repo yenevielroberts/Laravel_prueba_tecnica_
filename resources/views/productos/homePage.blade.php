@@ -8,18 +8,18 @@
 </head>
 <body>
     <!--header-->
-    <header class="bg-orange-200 h-20 flex items-center">
+    <header class="bg-orange-100 h-20 flex items-center">
         <nav class="flex flex-row w-full items-center justify-between">
             <div class="flex flex-row w-full ml-5">
-                <a href="" class="m-2">Comida</a>
-                <a href="{{ route('pedidos.history') }}" class="m-2">Historial</a> 
-                <a href=""class="m-2">Cesta</a> 
+                <a href="" class="m-2 hover:text-teal-800">Comida</a>
+                <a href="" class="m-2 hover:text-teal-800">Historial</a> 
+                <a href=""class="m-2 hover:text-teal-800">Cesta</a> 
             </div>
             <div class="flex w-full m-3 justify-center">
                  <img src="/img/LOGO.png" class="w-25 h-10">
             </div>
             <div class="flex flex-row w-full justify-end mr-5">
-                <a href=""class="m-3 flex items-center"><svg class="w-5 h-5 text-black dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <a href="{{ route('searchForm') }}"class="m-3 flex items-center"><svg class="w-5 h-5 text-black dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                 </svg>Buscar</a>
                 <a href="" class="m-3 flex items-center">
@@ -50,7 +50,7 @@
         <div class="flex flex-row flex-wrap justify-evenly  mt-5 mb-5">
             @foreach ($productos as $products )
                 <div class="flex flex-col items-center">
-                    <img src="/img/comida/pasta.png" class="w-50 h-70 rounded-xl">
+                    <img src="/img/comida/pasta.png" class="w-50 h-70 rounded-xl hover:ring-4 ring-white">
                     <p class="text-white">{{ $products->nombre_pro }}</p>
                     <p class="rounded-full bg-lime-300 p-1 mt-2 mb-2"> {{ $products->precio_pro}}€</p>
                 </div>
@@ -66,13 +66,13 @@
 
                 <h2 class=" text-3xl p-5 w-full">Nuestros Productos</h2>
                 <div class="flex w-screen justify-end">
-                <a href="{{ route('getAllProductos') }}" class="border p-1 rounded-full">Ver todos los productos</a>
+                <a href="{{ route('homePage') }}" class="border p-1 rounded-full hover:bg-teal-800 hover:text-white">Ver todos los productos</a>
                 </div>
         </div>
          <div class="flex flex-row flex-wrap justify-evenly mt-5 mb-5">
             @foreach ($productos as $products )
                 <div class="flex flex-col items-center">
-                    <img src="/img/comida/pasta.png" class="w-50 h-70 rounded-xl">
+                    <img src="/img/comida/pasta.png" class="w-50 h-70 rounded-xl hover:ring-4 ring-white">
                     <p class="text-black">{{ $products->nombre_pro }}</p>
                     <p class="rounded-full bg-lime-300 p-2 mt-2 mb-2 "> {{ $products->precio_pro}}€</p>
                 </div>
@@ -83,18 +83,18 @@
 <!--Footer-->
 <footer class="bg-teal-900  h-40 flex flex-row ">
     <div class="flex flex-col w-full m-5 text-white">
-        <a>Sobre Nosotros</a>
-        <a>Comida</a>
-        <a>Historial</a>
-        <a>Envios</a>
+        <a href="">Sobre Nosotros</a>
+        <a href="">Comida</a>
+        <a href="">Historial</a>
+        <a href="">Envios</a>
     </div>
     <div class="flex w-full mt-10  justify-center ">
         <img src="/img/LOGO.png" class="w-100 h-25 ">
     </div>
     <div class="flex flex-col w-full items-end m-5 text-white">
-        <a>Mi cuenta</a>
-        <a>Contacto</a>
-        <a>Blogs</a>
+        <a href="">Mi cuenta</a>
+        <a href="">Contacto</a>
+        <a href="">Blogs</a>
     </div>
 </footer>
 </body>

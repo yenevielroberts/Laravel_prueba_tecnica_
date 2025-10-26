@@ -37,7 +37,7 @@ Route::post('/user/changePassword',[UserController::class,'changePassword'])->na
 Route::get('/categorias/get/',[ProductosController::class,'getCategorias'])->name('getCategorias');
 
 //Obtengo todos los prodcutos
-Route::get('/products/get/type',[ProductosController::class,'getAllProductos'])->name('getAllProductos');
+Route::get('/products/get/type',[ProductosController::class,'getAllProductos'])->name('homePage');
 
 //Productos por categorias
 Route::get('/products/get',[ProductosController::class,'getProductsByCategoria'])->name('productCategoria');
@@ -46,6 +46,7 @@ Route::get('/products/get',[ProductosController::class,'getProductsByCategoria']
 Route::get('/pedido/create',[PedidosController::class,'formPedido'])->name('pedidos.form');
 
 //Busqueda
+Route::get('/search',[ProductosController::class,'searchForm'])->name('searchForm');
 Route::post('/search',[ProductosController::class,'search'])->name('search');
 
 //Inserta un pedido

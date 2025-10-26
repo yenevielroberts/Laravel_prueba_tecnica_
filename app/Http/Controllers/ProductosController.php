@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Alergenos;
 use App\Models\Categorias;
 use App\Models\Productos;
 use App\Models\ProductosAlergenos;
@@ -20,39 +22,60 @@ class ProductosController extends Controller
     public function getProductsByCategoria(Request $request){
 
         //para empezar los parametro? y para separar entre ellos &
-        $categoriaId=$request->input('categoriaId');
-        $alergenoId=$request->input('alergenoId');
+        $tiposComida=$request->input('tiposComida');
+        $alergenos=$request->input('alergenos');
+        $resultados=[];
 
-        if($categoriaId!=null && $alergenoId!=null){
+        if(!empty($tiposComida)&& !empty($alergenos)){
 
-             $productos=ProductosAlergenos::where('alergeno_id',$alergenoId)->get();
-            return $productos;
+            foreach($tiposComida as $tipo){
 
-        }else if($categoriaId!=null){
+                foreach($alergenos as $alergeno){
 
-               $productos=Productos::with('categoria')->where('categoria_id',$categoriaId)->get();//Con el with hace dos consultas por cada tabla en luego los combina en memoria
+                    $productos=Productos::with(['categoria','alergenos'])->where('type_cat',$tipo)->where('nombre_ale',$alergeno)->get();
 
-             return view('products.lista',['productos'=>$productos]);
+                    $resultados=$productos;
+                }
+            }
+        }else if(!empty($tiposComida)){
+
+             foreach($tiposComida as $tipo){
+                //whereHas Filtra los productos según un campo de la tabla categorias.
+                $productos=Productos::with('categoria')->whereHas('categoria',function($query) use($tipo){
+                    $query->where('type_cat',$tipo);
+                })->get();
+                $resultados[]=$productos;
+            }
+                 
+        }else if(!empty($alergenos)){
+    
+            foreach($alergenos as $alergeno){
+
+                $productos=Productos::with('alergenos')->where('nombre_ale',$alergeno)->get();
+                $resultados[]=$productos;
+            }
         }else{
-            $productos=Productos::orderby('created_at','desc')->get();
-            return view('products.lista',['productos'=>$productos]);
 
+             $productos=Productos::orderby('created_at','desc')->get();
+            return view('productos.resultadosSearch',['resultados'=>$productos]); 
         }
+
+        return view('productos.resultadosSearch',['resultados'=>$resultados]);
     }
 
     //función que deveulve todas las categorias /categorias/get
     public function getCategorias(){
         $categorias=Categorias::orderby('created_at','desc')->get();
         
-        return view('categorias',["categorias"=>$categorias]);
+        return response()->json([$categorias],200);
     }
 
-    public function vistaCategorias(){
-         $categorias=Categorias::orderby('created_at','desc')->get();
-         
-       return view('categorias',['categorias'=>$categorias]);
-    }
+    public function searchForm(){
+        $tiposComida=Categorias::orderBy('type_cat','desc')->get();
+        $alergenos=Alergenos::orderBy('nombre_ale','desc')->get();
 
+        return view('productos.search',['tiposComida'=>$tiposComida,'alergenos'=>$alergenos]);
+    }
     // /search/
     public function search(Request $request){
         $keyword=$request->input("keyword");
@@ -67,8 +90,12 @@ class ProductosController extends Controller
             $query->where('nombre_pro','LIKE','%'.$keyword.'%')->Orwhere('descripcion_pro','LIKE','%'.$keyword.'%');
         })->get();
 
-        return $productos;
-
+        if($productos ->isEmpty()){
+              return redirect()->route('searchForm')->with('mensaje','No se encontro productos con estosfiltros');
+        }else{
+           return view('productos.resultadosSearch',['resultados'=>$productos,'keyword'=>$keyword]);
+        }
+       
     }
  
 }
