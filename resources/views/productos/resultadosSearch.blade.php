@@ -38,6 +38,9 @@
                 @endforeach
          </div>
 </div>
- 
+@if($resultados->count()==10)
+     {{ $resultados->links() }}
+@endif
+
 </body>
 </html>

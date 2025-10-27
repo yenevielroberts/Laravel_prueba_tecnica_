@@ -24,7 +24,7 @@
 
             <div class="flex flex-col items-center">
                 <button type="submit" id="btnRegistro" name="btnRegistro" class="rounded-full w-25 p-1 bg-green-700 hover:bg-yellow-300"> Registrarse</button>
-                 <a href="{{ route('getEmailForm') }}" class="hover:text-blue-700 mt-3">¿Has olvidado tu contraseña?</a>
+                 <a href="{{ route('user.getEmailForm') }}" class="hover:text-blue-700 mt-3">¿Has olvidado tu contraseña?</a>
                    <a href="{{ route('login') }}" class="hover:text-blue-700">¿Ya tienes una cuenta?</a>
             </div>
           

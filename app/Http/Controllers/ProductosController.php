@@ -77,7 +77,7 @@ class ProductosController extends Controller
             return view('productos.resultadosSearch',['resultados'=>$resultados]);
         }else{
 
-             $productos=Productos::orderby('created_at','desc')->get();
+             $productos=Productos::orderby('created_at','desc')->paginate(10);
             return view('productos.resultadosSearch',['resultados'=>$productos]); 
         }
 
@@ -102,7 +102,7 @@ class ProductosController extends Controller
         $keyword=$request->input("keyword");
 
         if(empty($keyword)){
-            return response()->json([]);
+              return redirect()->back()->with('mensaje','No se ha instroducido una palabra clave');
         }
         //$query es la variable interna y representa la subconsulta
         //use para definir los parametros
@@ -112,7 +112,7 @@ class ProductosController extends Controller
         })->get();
 
         if($productos ->isEmpty()){
-              return redirect()->route('searchForm')->with('mensaje','No se encontro productos con estosfiltros');
+              return redirect()->back()->with('mensaje','No se encontro productos con estosfiltros');
         }else{
            return view('productos.resultadosSearch',['resultados'=>$productos,'keyword'=>$keyword]);
         }

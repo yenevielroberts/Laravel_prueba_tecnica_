@@ -7,6 +7,12 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-orange-100">
+      @if(session('mensaje'))
+
+       <div id="flas" class="p-4 text-center bg-green-50 text-green-500 font-bold">
+        {{ session('mensaje') }}<!--Muestro el valor-->
+    </div>  
+    @endif
     <div class="flex flex-col items-center w-full">
         <div class="flex flex-row items-center w-full">
              <!--Icono close-->
