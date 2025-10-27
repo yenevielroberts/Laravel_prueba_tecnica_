@@ -49,7 +49,7 @@ class UserController extends Controller
             $validated=$request->validate([
                 'name'=>'string|required|max:255',
                 'email'=>'email|required|unique:users',//Le digo que debe ser unico en la tabla users
-                'phone'=>'integer|min:9|max:9',
+                'phone'=>'integer|min:9',
                 'password'=>'required|string|min:4|confirmed'//Ya laravel se encarga de hacer la compraración entre las contraseñas.
             ]);
 
