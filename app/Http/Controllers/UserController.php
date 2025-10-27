@@ -60,6 +60,11 @@ class UserController extends Controller
          
     }
 
+    public function vistaPerfil(){
+        
+        return view('user.perfil');
+    }
+
     public function changePassword(Request $request){
         $userId=$request->input('userID');
         $validated=$request->validate([

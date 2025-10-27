@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-</head>
-<body>
-    <h1>{{Auth::user()->name}}</h1>
-</body>
-</html>
+<x-header>
+    <div class="flex flex-col w-full items-center  justify-center">
+        <h1 class="text-3xl font-bold mt-10">Hola {{Auth::user()->name}}</h1>
+        <form action="{{ route('logout') }}" method="POST">
+            <button type="submit" id="btnLogout" name="btnLogout" class="mt-10 bg-green-800 p-2 rounded-4xl w-20 hover:ring-1 ring-white">Logout</button>
+        </form> 
+    </div>
+</x-header>

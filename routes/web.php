@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Mail\resetPassword;
 
 use App\Models\Pedido;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,7 +65,12 @@ Route::post('/setOrder',[PedidosController::class,'setOrder'])->name('pedidos.se
 
 //Enviar historial
 Route::get('/history',[PedidosController::class,'history'])->name('pedidos.history');
+
+//Perfil
+Route::get('/perfil',[UserController::class,'vistaPerfil'])->name('user.perfil');
+
 });
+
 
 //Reset password
 Route::get('forgot/form',[UserController::class,'getPasswordForm'])->name('user.getPasswordForm');
