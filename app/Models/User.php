@@ -48,4 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail//Tell laravel que 
             'password' => 'hashed',
         ];
     }
+
+    public function pedidos(){
+        return $this->hasMany(Pedido::class);
+    }
 }

@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\PedidosProductos;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PedidosController extends Controller
 {
     public function cesta(){
-        return view('productos.cesta');
+        $user=Auth::user();
+        // Obtengo los pedidos del usuario
+        $pedidos=Pedido::where('user_id',$user->id)->pluck('id');// Obtengo Solo los IDs
+        
+        // obtengo todos los productos de esos pedidos de una vez
+        $datos=PedidosProductos::with(['pedido','producto'])->whereIn('pedido_id', $pedidos)->get();
+        dd($datos);
+       
+        return view('productos.cesta',['pedidoUser'=>$datos]);
     }
 
 

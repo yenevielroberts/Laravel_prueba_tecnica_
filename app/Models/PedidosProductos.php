@@ -11,11 +11,14 @@ class PedidosProductos extends Model
     use HasFactory;
     protected $fillable=['producto_id','pedido_id'];
 
-     public function productos(){
-        return $this->hasMany(Productos::class);
+     public function producto(){
+        //le digo a Laravel cuál es la clave foránea y cuál es la clave local
+        return $this->hasMany(Productos::class,'producto_id','id');
+        // 'pedido_id' => columna en pedidos_productos
+        // 'id' => columna en pedidos
     }
 
-     public function pedidos(){
-        return $this->hasMany(Pedido::class);
+     public function pedido(){
+        return $this->hasMany(Pedido::class,'pedido_id','id');
     }
 }

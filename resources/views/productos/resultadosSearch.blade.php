@@ -29,7 +29,9 @@
                 @foreach ($resultados as $products )
                 <!--Container individual de una foto-->
                     <div class="flex flex-col items-center">
-                        <img src="/img/comida/pasta.png" class="w-50 h-70 rounded-xl hover:ring-4 ring-white">
+                        <a href="{{ route('detalle', $products->id) }}">
+                            <img src="/img/comida/pasta.png" class="w-50 h-70 rounded-xl hover:ring-4 ring-white">
+                        </a>
                         <p class="text-black">{{ $products->nombre_pro }}</p>
                         <p class="rounded-full bg-lime-300 p-1 mt-2 mb-2"> {{ $products->precio_pro}}€</p>
                     </div>

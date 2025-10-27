@@ -11,7 +11,10 @@ class Pedido extends Model
     /** @use HasFactory<\Database\Factories\PedidoFactory> */
     use HasFactory;
 
-    public function pedidoProductos(){
-    return $this->belongsTo(PedidosProductos::class);
+    public function user(){
+      return $this->belongsTo(User::class);
+    }
+    public function productos(){
+    return $this->belongsTo(PedidosProductos::class,'pedidos_productos','pedido_id','producto_id')->withPivot('precio_pro');
    }
 }

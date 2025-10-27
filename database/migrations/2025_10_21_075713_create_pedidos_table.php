@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('pickup_time');
             $table->string('address');
             $table->string('payment_type');
+            $table->foreignId('user_id')->constrained();
         });
     }
 

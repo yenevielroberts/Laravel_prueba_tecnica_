@@ -50,7 +50,7 @@ class UserController extends Controller
                 'name'=>'string|required|max:255',
                 'email'=>'email|required|unique:users',//Le digo que debe ser unico en la tabla users
                 'phone'=>'integer|min:9|max:9',
-                'password'=>'required|string|min:8|confirmed'//Ya laravel se encarga de hacer la compraración entre las contraseñas.
+                'password'=>'required|string|min:4|confirmed'//Ya laravel se encarga de hacer la compraración entre las contraseñas.
             ]);
 
            $user= User::create($validated);//returns a instance model of user
@@ -124,7 +124,7 @@ class UserController extends Controller
         $data=$request->validate([
             'token'=>'required|string',
             'email'=>'required|email',
-            'password'=>'required|confirmed|min:8'
+            'password'=>'required|confirmed|min:4'
         ]);
 
         $record=password_reset_tokens::where('email',$data['email'])->first();

@@ -6,6 +6,9 @@
     <title>Set order</title>
 </head>
 <body>
+         @foreach ( $pedidoUser as $pedido )
+         <h1>{{ $pedido->producto->nombre_pro }}</h1>
+         @endforeach
     <form method="POST" action="{{ route('pedidos.setOrder') }}">
         @csrf
         <label for="pickup_day">Pickup day</label>

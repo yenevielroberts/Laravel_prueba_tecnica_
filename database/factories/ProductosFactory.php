@@ -22,7 +22,7 @@ class ProductosFactory extends Factory
             'nombre_pro'=>fake()->name(),
             'tipo_pro'=>fake()->randomElement($tipo),
             'descripcion_pro'=>fake()->realText(100),
-            'precio_pro'=>fake()->randomFloat(1,100),
+            'precio_pro'=>fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 50),
            'categoria_id'=>Categorias::inRandomORder()->first()->id,
         ];
     }

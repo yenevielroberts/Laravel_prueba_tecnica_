@@ -18,9 +18,11 @@ class PedidosProductosFactory extends Factory
      */
     public function definition(): array
     {
+        $producto=Productos::inRandomOrder()->first();
         return [
-            'producto_id'=>Productos::inRandomOrder()->first()->id,
-            'pedido_id'=>Pedido::inRandomOrder()->first()->id
+            'producto_id'=>$producto->id,
+            'pedido_id'=>Pedido::inRandomOrder()->first()->id,
+            'precio_pro'=>$producto->precio_pro
         ];
     }
 }

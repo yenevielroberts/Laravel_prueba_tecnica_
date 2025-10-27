@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,8 @@ class PedidoFactory extends Factory
             'pickup_day'=>fake()->date(),
             'pickup_time'=>fake()->time(),
             'address'=>fake()->address(),
-            'payment_type'=>fake()->randomElement($paymentType)
+            'payment_type'=>fake()->randomElement($paymentType),
+            'user_id'=>User::inRandomOrder()->first()->id
 
         ];
     }

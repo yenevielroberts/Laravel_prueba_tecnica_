@@ -13,6 +13,6 @@ class AlergenosSeeder extends Seeder
      */
     public function run(): void
     {
-        Alergenos::factory()->count(8)->create();
+        Alergenos::factory()->count(20)->create();
     }
 }

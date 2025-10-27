@@ -11,8 +11,9 @@ class ProductosAlergenosSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+  
     public function run(): void
     {
-        ProductosAlergenos::factory()->count(5)->create();
+        ProductosAlergenos::factory()->count(25)->create();
     }
 }
