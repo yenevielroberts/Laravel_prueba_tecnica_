@@ -14,19 +14,37 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
             </svg>
         </a>
-      @if($cesta->isEmpty())
+      @if($cesta->isEmpty() && $subtotal==0)
         <div class="flex justify-center items-center m-10  bg-teal-800 rounded-lg p-5">
             <h1 class="text-lg text-white ">No has agregado productos a tu cesta<h1>
         </div>
-    @endif
 
-    <!--Lista de items-->
-  <div class="flex fle-col items-center justify-center">
+        @else
+
+    <!--container-->
+  <div class="flex flex-col md:m-15 m-15 items-center justify-center">
+        <!--Pago-->
+        <div class="flex  flex-col m-15 border w-5/12 p-5 rounded-lg font-bold">
+            <div class="flex flex-row justify-between">
+                <p class="font-bold">Subtotal</p>
+                <p>{{  $subtotal }}€</p>
+            </div> 
+            <div class="flex flex-row justify-between">
+                <p>Gastos de envio</p>
+                <p>5€</p>
+            </div> 
+            <div class="flex flex-row justify-between">
+                <p>Total</p>
+                <p>{{ $subtotal+5 }}€</p>
+            </div>
+        </div>
+
+         <!--Items-->
         @foreach ($cesta as $item )
-            <div class="flex  flex-row m-5 border w-5/12 p-5 rounded-lg">
-                <di>
-                    <img src="/img/comida/pasta.png" class="rounded-lg mr-5" >
-                </di>
+            <div class="flex  flex-row m-5  border w-5/12 p-5 rounded-lg">
+                <div class="mr-5">
+                    <img src="/img/comida/pasta.png" class="rounded-lg" >
+                </div>
                 <!--Info pedido-->
                 <div class="mr-30">
                     <h3 class="text-xl font-bold">{{ $item->producto->nombre_pro }}</h3>
@@ -50,5 +68,6 @@
     <x-footer>
         <a href="" class="flex justify-end w-full mr-5 text-white items-center">CHECKOUT</a>
     </x-footer>
+@endif
 </body>
 </html>

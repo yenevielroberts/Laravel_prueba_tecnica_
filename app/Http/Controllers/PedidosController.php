@@ -75,7 +75,11 @@ class PedidosController extends Controller
          $userId=Auth::user()->id;
          $cesta=Cesta::with('producto')->where('user_id',$userId)->get();
 
-         return view('productos.cesta',['cesta'=>$cesta]);
+         $subtotal=$cesta->sum(function($item){
+            return $item->producto->precio_pro*$item->cantidad;
+         });
+
+         return view('productos.cesta',['cesta'=>$cesta,'subtotal'=>$subtotal]);
     }
 
 
