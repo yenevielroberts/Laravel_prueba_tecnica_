@@ -51,10 +51,17 @@ Route::get('/pedido/create',[PedidosController::class,'formPedido'])->name('pedi
 Route::get('/search',[ProductosController::class,'searchForm'])->name('searchForm');
 Route::post('/search',[ProductosController::class,'search'])->name('search');
 
+//Cesta
 Route::get('/cesta',[PedidosController::class,'verCesta'])->name('cesta');
 Route::get('/cesta/{productoId}',[PedidosController::class,'cesta'])->name('addcesta');
+
+Route::get('/cesta/quitarCantidad/{productoId}',[PedidosController::class,'quitarCantidad'])->name('quitarCantidad');
+
+Route::get('/cesta/eliminar/{productoId}',[PedidosController::class,'eliminarProducto'])->name('eliminarProducto');
+
 //Inserta un pedido
 Route::post('/setOrder',[PedidosController::class,'setOrder'])->name('pedidos.setOrder');
+
 //Enviar historial
 Route::get('/history',[PedidosController::class,'history'])->name('pedidos.history');
 });

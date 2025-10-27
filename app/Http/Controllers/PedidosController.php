@@ -31,24 +31,48 @@ class PedidosController extends Controller
 
 
         if(!$productoId){
-            return  redirect()->back()->with('error','Prodcutono expecificado');
+            return  redirect()->back()->with('mensaje','Prodcutono expecificado');
         }
 
         //dd($productoId);
 
         $cesta=Cesta::firstOrNew(
             [ 'user_id'=>$userId,'producto_id'=>$productoId],
-            ['cantida'=>1]
+            ['cantida'=>1]//Por defecto cuando se agregue un producto tendra cantida 1
         );
-        $cesta->cantidad+=1;
+        $cesta->cantidad+=1;//Si no es nuevo le sumo uno a la cantida del producto
         $cesta->save();
 
-        return response()->json(['mensaje'=>"producto agregado a la cesta",'cesta'=>$cesta]);
+        return redirect()->back()->with('mensaje','producto agregado a la cesta');
+       // return response()->json(['mensaje'=>"producto agregado a la cesta",'cesta'=>$cesta]);
+    }
+
+    public function quitarCantidad(Request $request){
+            $userId=Auth::user()->id;
+            $productoId=$request->route('productoId');
+            //Obtengo el producto de la cesta
+            $cesta=Cesta::where('user_id',$userId)->where('producto_id',$productoId)->first();
+
+            //resto la cantidad
+            if($cesta->cantidad>1){
+                $cesta->cantidad -=1;
+                $cesta->save();
+            }
+        
+        return redirect()->back();
+    }
+
+    public function eliminarProducto(Request $request){
+
+        $userId=Auth::user()->id;
+        $productoId=$request->route('productoId');
+
+        Cesta::where('producto_id',$productoId)->delete();
+        return redirect()->back();
     }
 
     public function verCesta(){
          $userId=Auth::user()->id;
-
          $cesta=Cesta::with('producto')->where('user_id',$userId)->get();
 
          return view('productos.cesta',['cesta'=>$cesta]);

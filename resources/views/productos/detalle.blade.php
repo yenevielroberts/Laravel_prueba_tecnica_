@@ -8,10 +8,10 @@
 </head>
 <body class="bg-orange-100">
 
-    @if(session('error'))
+    @if(session('mensaje'))
 
        <div id="flas" class="p-4 text-center bg-green-50 text-green-500 font-bold">
-        {{ session('error') }}<!--Muestro el valor-->
+        {{ session('mensaje') }}<!--Muestro el valor-->
     </div>  
     @endif
     <div class="flex flex-col">
