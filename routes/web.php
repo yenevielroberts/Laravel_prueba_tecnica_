@@ -51,7 +51,8 @@ Route::get('/pedido/create',[PedidosController::class,'formPedido'])->name('pedi
 Route::get('/search',[ProductosController::class,'searchForm'])->name('searchForm');
 Route::post('/search',[ProductosController::class,'search'])->name('search');
 
-Route::get('/cesta',[PedidosController::class,'cesta'])->name('cesta');
+Route::get('/cesta',[PedidosController::class,'verCesta'])->name('cesta');
+Route::get('/cesta/{productoId}',[PedidosController::class,'cesta'])->name('addcesta');
 //Inserta un pedido
 Route::post('/setOrder',[PedidosController::class,'setOrder'])->name('pedidos.setOrder');
 //Enviar historial

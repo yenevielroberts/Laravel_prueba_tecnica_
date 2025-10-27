@@ -14,7 +14,7 @@ class ProductosController extends Controller
     public function getAllProductos(){
 
         $productos=Productos::with(['categoria','alergenos'])->get();
-
+        //dd($productos);
         return view('productos.homePage',["productos"=>$productos]);
     }
 

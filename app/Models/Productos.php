@@ -24,6 +24,10 @@ class Productos extends Model
    }
 
     public function pedidos(){
-    return $this->belongsToMany(PedidosProductos::class,'pedidos_productos', 'producto_id', 'pedido_id')->withPivot('precio_pro');
+    return $this->belongsToMany(Pedido::class,'pedidos_productos', 'producto_id', 'pedido_id')->withPivot('precio_pro');
+   }
+
+   public function cesta(){
+    return $this->belongsTo(cesta::class,'producto_id');
    }
 }

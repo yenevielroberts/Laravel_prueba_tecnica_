@@ -7,6 +7,13 @@
      @vite('resources/css/app.css')
 </head>
 <body class="bg-orange-100">
+
+    @if(session('error'))
+
+       <div id="flas" class="p-4 text-center bg-green-50 text-green-500 font-bold">
+        {{ session('error') }}<!--Muestro el valor-->
+    </div>  
+    @endif
     <div class="flex flex-col">
        <!--Container para la imagen-->
         <div class="flex flex-row">
@@ -54,7 +61,7 @@
             </div>
         </div>
             <x-footer>
-                <a href="{{ route('cesta',$producto->id) }}" type="submit"class="flex justify-end w-full mr-5 text-white items-center">
+                <a href="{{ route('addcesta',$producto->id) }}" class="flex justify-end w-full mr-5 text-white items-center">
                     <svg class="w-6 h-6 text-white dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                     </svg>

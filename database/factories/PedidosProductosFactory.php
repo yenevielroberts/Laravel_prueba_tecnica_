@@ -21,7 +21,7 @@ class PedidosProductosFactory extends Factory
         $producto=Productos::inRandomOrder()->first();
         return [
             'producto_id'=>$producto->id,
-            'pedido_id'=>Pedido::inRandomOrder()->first()->id,
+            'pedido_id'=>Pedido::inRandomOrder()->first()->id,//Puede insertar más de una vez el mismo pedido lo que no garantiza que todos los pedidos tengan productos.
             'precio_pro'=>$producto->precio_pro
         ];
     }

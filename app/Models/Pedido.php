@@ -12,9 +12,13 @@ class Pedido extends Model
     use HasFactory;
 
     public function user(){
-      return $this->belongsTo(User::class);
+      return $this->belongsTo(User::class,'user_id');
     }
     public function productos(){
-    return $this->belongsTo(PedidosProductos::class,'pedidos_productos','pedido_id','producto_id')->withPivot('precio_pro');
+    return $this->belongsToMany(
+      Productos::class,
+      'pedidos_productos',
+      'pedido_id','producto_id')
+      ->withPivot('precio_pro');
    }
 }
