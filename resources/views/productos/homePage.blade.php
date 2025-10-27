@@ -13,7 +13,7 @@
             <div class="flex flex-row w-full ml-5">
                 <a href="" class="m-2 hover:text-teal-800">Comida</a>
                 <a href="" class="m-2 hover:text-teal-800">Historial</a> 
-                <a href=""class="m-2 hover:text-teal-800">Cesta</a> 
+                <a href="{{ route('cesta') }}"class="m-2 hover:text-teal-800">Cesta</a> 
             </div>
             <div class="flex w-full m-3 justify-center">
                  <img src="/img/LOGO.png" class="w-25 h-10">

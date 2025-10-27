@@ -61,17 +61,13 @@
                  </div>
             </div>
             <!--button busqueda-->
-            <div class="fixed bottom-0 left-0 flex flex-row bg-teal-800 w-full items-center  h-15">
-                 <div class="flex justify-start w-full">
-                <img src="/img/Group 348.png" class="w-30 ml-5">
-                </div>
-                
+            <x-footer>
                 <button type="submit"class="flex justify-end w-full mr-5 text-white items-center">
                      <svg class="w-5 h-5 text-white dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                     </svg>
                 REALIZAR BÚSQUEDA</button>
-            </div>
+            </x-footer>
         </form>
     </div>
 </body>

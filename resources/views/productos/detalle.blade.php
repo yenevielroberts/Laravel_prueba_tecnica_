@@ -53,19 +53,14 @@
                 
             </div>
         </div>
-
-           <div class="fixed bottom-0 left-0 flex flex-row bg-teal-800 w-full items-center  h-15">
-                 <div class="flex justify-start w-full">
-                <img src="/img/Group 348.png" class="w-30 ml-5">
-                </div>
-                
+            <x-footer>
                 <a href="{{ route('cesta',$producto->id) }}" type="submit"class="flex justify-end w-full mr-5 text-white items-center">
                     <svg class="w-6 h-6 text-white dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                     </svg>
 
                 AÑADIR A LA CESTA</a>
-            </div>
+            </x-footer>
     </div>
 </body>
 </html>
