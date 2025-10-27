@@ -20,10 +20,9 @@ class ProductosController extends Controller
 
     public function getOneProduct(Request $request){
 
-        $productoId=$request->input('productoId');
+        $productoId=$request->route('productoId');
         $producto=Productos::with(['categoria','alergenos'])->where('id',$productoId)->first();
-
-        return view('productos.detalle',['producto',$producto]);
+        return view('productos.detalle',['producto'=>$producto]);
     }
 
     //función que devuelve los productos por categorias /products/get/

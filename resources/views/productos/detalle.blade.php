@@ -8,17 +8,19 @@
 </head>
 <body class="bg-orange-100">
     <div class="flex flex-col">
+       <!--Container para la imagen-->
         <div class="flex flex-row">
             <div class="w-full h-full">
                 <img src="/img/comida/pasta.png" class="w-full h-screen">
              </div>
+              <!--Container para el detalle-->
             <div class="w-full">
                 <header class="flex items-center">
                     <nav class="flex flex-row flex-wrap w-full items-center justify-between">
                         <div class="m-5">
                             <img src="/img/vector.png" class="  md:w-10 w-10">
                         </div>
-                        <a class="md:m-2">Comida</a>
+                        <a href="{{ route('homePage') }}" class="md:m-2">Comida</a>
                         <a>Historial</a>
                         <a>Cesta</a>
                         <a href="{{ route('searchForm') }}"class="m-3 flex items-center">
@@ -33,20 +35,34 @@
                     Perfil</a>
                     </nav>
                 </header>
-                <h1>{{$producto->nombre_pro}}</h1>
+                <!--Descripción-->
+                <div class="flex flex-col items-start ml-10 mt-10">
+                    <h1 class="text-5xl font-bold mb-8">{{$producto->nombre_pro}}</h1>
+                    <p class="rounded-full bg-teal-800 p-2 w-20" >{{$producto->precio_pro}}€</p>
+                    <p class="text-teal-800 mt-10 font-bold">Sobre el producto</p>
+                    <p>{{ $producto->descripcion_pro }}</p>
+                    <!--Alergenos-->
+                    <div class="flex flex-row mt-2">
+                        @foreach ( $producto->alergenos as $alergeno )
+                            <p>Contiene {{$alergeno->nombre_ale}}</p>
+                        @endforeach
+                    </div>
+                </div>
+                
             </div>
         </div>
-      
+
            <div class="fixed bottom-0 left-0 flex flex-row bg-teal-800 w-full items-center  h-15">
                  <div class="flex justify-start w-full">
                 <img src="/img/Group 348.png" class="w-30 ml-5">
                 </div>
                 
-                <button type="submit"class="flex justify-end w-full mr-5 text-white items-center">
-                     <svg class="w-5 h-5 text-white dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                <a href="{{ route('cesta',$producto->id) }}" type="submit"class="flex justify-end w-full mr-5 text-white items-center">
+                    <svg class="w-6 h-6 text-white dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                     </svg>
-                REALIZAR BÚSQUEDA</button>
+
+                AÑADIR A LA CESTA</a>
             </div>
     </div>
 </body>
