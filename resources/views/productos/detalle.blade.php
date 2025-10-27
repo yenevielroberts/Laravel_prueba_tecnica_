@@ -40,7 +40,9 @@
                     <h1 class="text-5xl font-bold mb-8">{{$producto->nombre_pro}}</h1>
                     <p class="rounded-full bg-teal-800 p-2 w-20" >{{$producto->precio_pro}}€</p>
                     <p class="text-teal-800 mt-10 font-bold">Sobre el producto</p>
+                    <p class="mt-3"><span  class="text-teal-800 mt-10 font-bold">Tipo de comida: </span>{{ $producto->categoria->type_cat }}</p>
                     <p>{{ $producto->descripcion_pro }}</p>
+
                     <!--Alergenos-->
                     <div class="flex flex-row mt-2">
                         @foreach ( $producto->alergenos as $alergeno )
